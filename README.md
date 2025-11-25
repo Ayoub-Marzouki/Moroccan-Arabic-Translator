@@ -22,6 +22,8 @@ The application is divided into two main interaction points, handled by specific
 *   **Class:** `TranslatorRestController.java`
 *   **Function:** This is the actual engine. It accepts JSON data at `/api/translate`, processes it using the `TranslationService`, and returns the result. It doesn't care about the UI; it only deals with raw data.
 
+Learn more about the JSON structure in [Google's Documentation](https://ai.google.dev/api/generate-content#v1beta.models.generateContent).
+
 ## Prerequisites
 
 - Java 17 or later
