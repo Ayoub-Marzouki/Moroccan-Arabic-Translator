@@ -3,25 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English to Darija Translator</title>
+    <title>Morocco AI Translate | Next-Gen Translation</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@300;500;700&family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>English to Darija</h1>
-        <p class="subtitle">Translate English text to Moroccan Arabic instantly</p>
-        
-        <div class="input-group">
-            <textarea id="inputText" placeholder="Type your English text here..."></textarea>
+    
+    <!-- Background Elements -->
+    <div class="bg-pattern"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <span>MOROCCAN DARIJA</span> Translator
+        </a>
+        <ul class="nav-links">
+            <li><a href="#translate" class="active">Translate</a></li>
+            <li><a href="#api">Developers</a></li>
+            <li><a href="#extension">Extension</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content fade-in" style="animation-delay: 0.2s;">
+            <h1 class="hero-title">
+                Speak <span class="gradient-text" id="typing-text"></span>
+            </h1>
+            <p class="hero-subtitle">
+                Bridging the gap between English and Moroccan Darija with state-of-the-art AI.
+            </p>
+            <a href="#translate" class="cta-button">Start Translating</a>
         </div>
-        
-        <button onclick="translateText()">Translate</button>
-        
-        <div class="result-group">
-            <h3>Translation</h3>
-            <div id="result" dir="auto"></div>
+    </section>
+
+    <!-- Translation Section -->
+    <section id="translate">
+        <div class="translator-wrapper fade-in">
+            <div class="glass-card">
+                <div class="translation-grid">
+                    <div class="input-area">
+                        <div class="area-header">English Source</div>
+                        <textarea id="inputText" placeholder="Type something amazing here..."></textarea>
+                    </div>
+                    <div class="output-area">
+                        <div class="area-header">Moroccan Darija</div>
+                        <div id="result"></div>
+                    </div>
+                    <div class="action-bar">
+                        <button class="translate-btn" onclick="translateText()">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                            Translate Now
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- API Section -->
+    <section id="api">
+        <div class="hero-content fade-in">
+            <h2 class="hero-title" style="font-size: 2.5rem;">Built for Developers</h2>
+            <p class="hero-subtitle">Integrate our powerful translation engine directly into your apps.</p>
+        </div>
+
+        <div class="api-container fade-in">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-body">
+                    <button class="copy-btn" onclick="copyCode()">Copy</button>
+                    <code class="code-block">
+                        <span class="comment"># Authentic translation via cURL</span><br>
+                        <span class="command">curl</span> -u user:password -X POST \<br>
+                        &nbsp;&nbsp;-H <span class="string">"Content-Type: application/json"</span> \<br>
+                        &nbsp;&nbsp;-d <span class="string">"{\"text\":\"Hello friend\"}"</span> \<br>
+                        &nbsp;&nbsp;http://localhost:1000/api/translate
+                    </code>
+                    <code class="code-block" style="margin-top: 30px;">
+                        <span class="comment">// JSON Response</span><br>
+                        {<br>
+                        &nbsp;&nbsp;<span class="keyword">"translation"</span>: <span class="string">"Ahlan sahbi"</span><br>
+                        }
+                    </code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extension Section -->
+    <section id="extension">
+        <div class="extension-showcase fade-in">
+            <div class="extension-info">
+                <h2 class="hero-title" style="font-size: 2.5rem; text-align: left;">Everywhere You Go</h2>
+                <p class="hero-subtitle" style="text-align: left;">
+                    Get translations instantly while browsing the web. Our Chrome Extension sits quietly in your side panel, ready when you are.
+                </p>
+                <ul class="feature-list">
+                    <li>
+                        <div class="feature-icon">⚡</div>
+                        <span>Instant Side-Panel Access</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🔒</div>
+                        <span>Secure API Communication</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🇲🇦</div>
+                        <span>Native Moroccan Context</span>
+                    </li>
+                </ul>
+                <p>Download is coming soon! (or not who knows!)</p>
+            </div>
+
+            <div class="browser-mockup">
+                <div class="browser-bar">
+                    <div class="dot red" style="width: 10px; height: 10px;"></div>
+                    <div class="dot yellow" style="width: 10px; height: 10px;"></div>
+                </div>
+                <div class="browser-content">
+                    <div class="main-page">
+                        <div class="skeleton sk-img"></div>
+                        <div class="skeleton sk-text"></div>
+                        <div class="skeleton sk-text" style="width: 60%"></div>
+                        <div class="skeleton sk-text"></div>
+                    </div>
+                    <div class="side-panel">
+                        <div style="color: white; font-size: 0.8rem; margin-bottom: 10px;">Morocco AI</div>
+                        <div class="skeleton" style="height: 60px; background: #1a2332;"></div>
+                        <div class="skeleton" style="height: 30px; margin-top: 10px; background: #0055ff;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Morocco AI Translate. Powered by Gemini.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>

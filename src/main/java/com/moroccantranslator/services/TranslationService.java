@@ -18,14 +18,18 @@ import java.util.Map;
 @Service
 public class TranslationService {
 
-    @Value("${gemini.api.key}")
+    @Value("${api.key}")
     private String apiKey;
+
+    public String getKey() {
+        return this.apiKey;
+    }
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
     // Using Gemini 2.5 Flash
-    private static final String GEMINI_API_URL_TEMPLATE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=%s";
+    private static final String GEMINI_API_URL_TEMPLATE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=%s";
 
     public TranslationService() {
         this.restTemplate = new RestTemplate();
@@ -53,7 +57,7 @@ public class TranslationService {
         // { "contents": [ { "parts": [ { "text": "..." } ] } ] } (check readme for docs)
         // Map <=> JSON {}
         Map<String, Object> part = new HashMap<>();
-        part.put("text", "Translate the following English text to Moroccan Arabic (Darija). Output ONLY the translation, no explanations: " + text);
+        part.put("text", "Translate the following English text to Moroccan Arabic (Darija). Output ONLY the translation, in arabic letters NOT latin letters, no explanations: " + text);
 
         // List <=> JSON ()
         Map<String, Object> content = new HashMap<>();
