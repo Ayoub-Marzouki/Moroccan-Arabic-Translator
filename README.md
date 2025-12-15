@@ -1,76 +1,77 @@
-# Moroccan-Arabic-Translator
+# Moroccan AI Translate
 
-A Spring Boot RESTful web service that translates English text to Moroccan Arabic (Darija) using the **Google Gemini 2.5 Flash** (Stable) LLM.
+A next-generation Spring Boot translation engine that bridges English and Moroccan Arabic (Darija) using **Google Gemini 2.5 Flash Lite**.
 
-## Features
-- **Model:** Uses `gemini-2.5-flash` for fast and free translations.
-- **Architecture:** Spring Boot + Spring MVC / JAX-RS.
-- **Structure:** Organized into clean packages (`controllers`, `services`).
-- **Frontend:** Minimal HTML/CSS/JS interface.
+## ✨ Features
+*   **Gemini 2.5 Flash Lite:** Optimized for speed and higher rate limits.
+*   **Neo-Maghreb Frontend:** A stunning, dark-mode interface inspired by cyberpunk aesthetics and Moroccan geometry.
+*   **Chrome Extension:** Translate instantly from your browser's side panel.
+*   **Secure API:** Endpoints are secured using Basic Authentication (Spring Security).
+*   **Developer Friendly:** Clean REST API with comprehensive documentation.
 
-## Architecture Components
+## 🏗 Architecture
 
-The application is divided into two main interaction points, handled by specific controllers:
+The application is built on Spring Boot 3 and divided into three main layers:
 
-### 1. The Client representer (`WebController`)
-*   **Role:** Serves the User Interface.
-*   **Class:** `WebController.java`
-*   **Function:** When you visit `http://localhost:1000/`, this controller delivers the `index.html` page. This HTML page (along with `script.js`) acts as the **Client** that consumes the API.
+### 1. The Client (`WebController` + Frontend)
+*   **Role:** Serves the "Neo-Maghreb" UI.
+*   **Tech:** Thymeleaf, CSS3 (Glassmorphism), Vanilla JS.
+*   **Access:** `http://localhost:1000/`
 
-### 2. The Web Service (`TranslatorRestController`)
-*   **Role:** Provides the REST API.
-*   **Class:** `TranslatorRestController.java`
-*   **Function:** This is the actual engine. It accepts JSON data at `/api/translate`, processes it using the `TranslationService`, and returns the result. It doesn't care about the UI; it only deals with raw data.
+### 2. The Chrome Extension
+*   **Role:** Provides side-panel access to the translator.
+*   **Tech:** Manifest V3, Service Workers.
+*   **Location:** `/chrome-extension` folder.
 
-Learn more about the JSON structure in [Google's Documentation](https://ai.google.dev/api/generate-content#v1beta.models.generateContent).
+### 3. The Secure Web Service (`TranslatorRestController`)
+*   **Role:** The engine room.
+*   **Endpoint:** `POST /api/translate`
+*   **Security:** Basic Auth (`user` / `password`).
+*   **Logic:** Orchestrates calls to the Gemini API via `TranslationService`.
 
-## Prerequisites
+## 🚀 Getting Started
 
+### Prerequisites
 - Java 17 or later
 - Maven 3.8+
-- A Google Gemini API Key (Get one for free from [Google AI Studio](https://aistudio.google.com/app/apikey))
+- A Google Gemini API Key
 
-## Configuration
+### Configuration
+1.  Open `src/main/resources/application.properties`.
+2.  Set your API key: `api.key=YOUR_KEY_HERE`
+3.  (Optional) Change default credentials:
+    ```properties
+    spring.security.user.name=user
+    spring.security.user.password=password
+    ```
 
-You must provide your Gemini API Key.
-
-**Method 1: Environment Variable (Recommended)**
-Linux/Mac:
-```bash
-export GEMINI_API_KEY=your_api_key_here
-```
-Windows (PowerShell):
-```powershell
-$env:GEMINI_API_KEY="your_api_key_here"
-```
-
-**Method 2: Application Properties**
-Open `src/main/resources/application.properties` and replace the placeholder:
-```properties
-gemini.api.key=your_api_key_here
-```
-
-## Running the Application
-
-Run the following command in the project root:
-
+### Running the App
 ```bash
 mvn spring-boot:run
 ```
+Server starts on: `http://localhost:1000`
 
-The application will start on `http://localhost:1000`.
+## 🛠 Usage Guide
 
-## Usage
+### 1. Web Interface
+Visit `http://localhost:1000` to experience the animated interface. The site handles authentication automatically for you.
 
-### Web UI
-Open `http://localhost:1000` in your browser.
+### 2. Chrome Extension
+1.  Go to `chrome://extensions/`.
+2.  Enable **Developer Mode**.
+3.  Click **Load Unpacked**.
+4.  Select the `chrome-extension` folder from this project.
+5.  Open the side panel and start translating!
 
-### REST API
-Endpoint: `POST /api/translate`
+### 3. REST API (for Developers)
+The API is secured. You must provide Basic Auth credentials.
 
 **cURL Example:**
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"text":"Hello friend"}' http://localhost:1000/api/translate
+curl -u user:password -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Hello friend"}' \
+  http://localhost:1000/api/translate
 ```
 
 **Response:**
@@ -79,3 +80,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"text":"Hello friend"}' ht
   "translation": "أهلا صاحبي"
 }
 ```
+
+## 📚 Gemini JSON Docs
+Learn more about the underlying JSON structure in [Google's Documentation](https://ai.google.dev/api/generate-content#v1beta.models.generateContent).
