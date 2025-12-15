@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Moroccan Arabic Translator",
+  "version": "1.0",
+  "description": "Translate text to Moroccan Arabic via Side Panel",
+  "permissions": ["sidePanel"],
+  "host_permissions": ["http://localhost:1000/*", "http://127.0.0.1:1000/*"],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_title": "Open Translator"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
+}
