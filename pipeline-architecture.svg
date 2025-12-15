@@ -1,0 +1,110 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+    <!-- Definitions -->
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#050a14;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0a1120;stop-opacity:1" />
+        </linearGradient>
+        <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#00f2ff" />
+        </marker>
+        <marker id="arrowhead-gold" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#ffb700" />
+        </marker>
+    </defs>
+
+    <!-- Background -->
+    <rect width="800" height="450" fill="url(#bgGradient)" rx="15" />
+    <path d="M0 50 h800 M0 150 h800 M0 250 h800 M0 350 h800 M200 0 v450 M400 0 v450 M600 0 v450" stroke="#ffffff" stroke-opacity="0.03" stroke-width="1" />
+
+    <!-- CLIENT LAYER (Left) -->
+    <g transform="translate(30, 150)">
+        <rect x="0" y="0" width="140" height="150" rx="10" fill="rgba(255,255,255,0.05)" stroke="#0055ff" stroke-width="2" filter="url(#neonGlow)" />
+        <text x="70" y="30" font-family="sans-serif" font-size="14" fill="#0055ff" font-weight="bold" text-anchor="middle">CLIENTS</text>
+        <rect x="20" y="50" width="100" height="35" rx="5" fill="#0055ff" />
+        <text x="70" y="73" font-family="sans-serif" font-size="12" fill="white" text-anchor="middle">Website</text>
+        <rect x="20" y="100" width="100" height="35" rx="5" fill="#0055ff" />
+        <text x="70" y="123" font-family="sans-serif" font-size="12" fill="white" text-anchor="middle">Chrome Ext</text>
+    </g>
+
+    <!-- BACKEND LAYER (Center) -->
+    <g transform="translate(300, 50)">
+        <rect x="0" y="0" width="240" height="350" rx="10" fill="rgba(255,255,255,0.05)" stroke="#00f2ff" stroke-width="2" filter="url(#neonGlow)" />
+        <text x="120" y="30" font-family="sans-serif" font-size="14" fill="#00f2ff" font-weight="bold" text-anchor="middle">SPRING BOOT SERVER</text>
+        
+        <!-- Public Area -->
+        <g transform="translate(20, 50)">
+            <rect x="0" y="0" width="200" height="60" rx="5" fill="rgba(0, 255, 0, 0.1)" stroke="#00ff00" stroke-width="1" stroke-dasharray="4" />
+            <text x="100" y="25" font-family="sans-serif" font-size="11" fill="#00ff00" text-anchor="middle">PUBLIC (Static Resources)</text>
+            <rect x="50" y="35" width="100" height="20" rx="3" fill="#222" />
+            <text x="100" y="49" font-family="sans-serif" font-size="10" fill="#aaa" text-anchor="middle">HTML / CSS / JS</text>
+        </g>
+
+        <!-- Security Gate -->
+        <g transform="translate(20, 130)">
+            <rect x="0" y="0" width="200" height="40" rx="5" fill="#222" stroke="#ffb700" stroke-width="2" />
+            <text x="100" y="25" font-family="sans-serif" font-size="12" fill="#ffb700" font-weight="bold" text-anchor="middle">Basic Auth Security Filter</text>
+        </g>
+
+        <!-- Secure API Area -->
+        <g transform="translate(20, 190)">
+            <rect x="0" y="0" width="200" height="140" rx="5" fill="rgba(0, 242, 255, 0.1)" stroke="#00f2ff" stroke-width="1" />
+            <text x="100" y="20" font-family="sans-serif" font-size="11" fill="#00f2ff" text-anchor="middle">SECURE API (/api/**)</text>
+            
+            <!-- Global Y = 50 + 190 + 40 = 280. Center Y = 295 -->
+            <rect x="20" y="40" width="160" height="30" rx="3" fill="#333" />
+            <text x="100" y="59" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">POST /translate</text>
+            
+            <!-- Global Y = 50 + 190 + 90 = 330. Center Y = 345 -->
+            <rect x="20" y="90" width="160" height="30" rx="3" fill="#333" />
+            <text x="100" y="109" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">POST /tts</text>
+        </g>
+    </g>
+
+    <!-- EXTERNAL LAYER (Right) -->
+    <g transform="translate(600, 100)">
+        <!-- Gemini - Moved to align center with Translate (Y=295) -->
+        <!-- Center=295. Global Top=265. Layer Base=100. Local Top=165 -->
+        <g transform="translate(20, 165)">
+            <rect x="0" y="0" width="140" height="60" rx="10" fill="rgba(255,255,255,0.05)" stroke="#ffffff" stroke-width="1" />
+            <text x="70" y="25" font-family="sans-serif" font-size="12" fill="#ffffff" font-weight="bold" text-anchor="middle">Gemini AI</text>
+            <text x="70" y="45" font-family="sans-serif" font-size="10" fill="#888" text-anchor="middle">Flash Lite</text>
+        </g>
+
+        <!-- Google TTS - Moved to align center with TTS (Y=345) -->
+        <!-- Center=345. Global Top=315. Layer Base=100. Local Top=215 -->
+        <g transform="translate(20, 215)">
+            <rect x="0" y="0" width="140" height="60" rx="10" fill="rgba(255,255,255,0.05)" stroke="#ffffff" stroke-width="1" />
+            <text x="70" y="25" font-family="sans-serif" font-size="12" fill="#ffffff" font-weight="bold" text-anchor="middle">Google TTS</text>
+            <text x="70" y="45" font-family="sans-serif" font-size="10" fill="#888" text-anchor="middle">Unofficial API</text>
+        </g>
+    </g>
+
+    <!-- ARROWS -->
+    
+    <!-- 1. Client -> Public Assets -->
+    <!-- From Website (Right Edge X=150, Y=217.5) to Public (Left X=320, Y=130) -->
+    <path d="M 150 218 L 220 218 L 220 130 L 320 130" fill="none" stroke="#00ff00" stroke-width="1" stroke-dasharray="5,5" marker-end="url(#arrowhead)" />
+    
+    <!-- 2. Client -> Security Gate -->
+    <!-- From Client Group Center (X=170, Y=225) to Security Gate (X=320, Y=200) -->
+    <path d="M 170 225 L 240 225 L 240 200 L 320 200" fill="none" stroke="#ffb700" stroke-width="2" marker-end="url(#arrowhead-gold)" />
+
+    <!-- 3. Security -> API Endpoints -->
+    <!-- Gate Bottom (Y=220) to API Area Top (Y=240) -->
+    <line x1="420" y1="220" x2="420" y2="240" stroke="#ffb700" stroke-width="2" marker-end="url(#arrowhead-gold)" />
+
+    <!-- 4. Translate -> Gemini (Straight Line) -->
+    <path d="M 500 295 L 620 295" fill="none" stroke="#00f2ff" stroke-width="2" marker-end="url(#arrowhead)" />
+
+    <!-- 5. TTS -> Google (Straight Line) -->
+    <path d="M 500 345 L 620 345" fill="none" stroke="#00f2ff" stroke-width="2" marker-end="url(#arrowhead)" />
+
+</svg>

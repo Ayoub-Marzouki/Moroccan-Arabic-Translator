@@ -115,6 +115,42 @@ function shakeElement(element) {
     }, 100);
 }
 
+let currentAudio = null;
+
+// --- Text-to-Speech ---
+async function speakText() {
+    const text = document.getElementById('result').innerText;
+    if (!text || text.startsWith("Error:") || text === "Translating...") return;
+
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+    }
+
+    try {
+        const response = await fetch('/api/tts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + btoa('user:password')
+            },
+            body: JSON.stringify({ text: text })
+        });
+
+        if (!response.ok) throw new Error("TTS request failed");
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        
+        currentAudio = new Audio(url);
+        currentAudio.play();
+    } catch (e) {
+        console.error("Audio playback error:", e);
+        alert("Could not play audio.");
+    }
+}
+
 // --- Utils ---
 function copyCode() {
     const code = `curl -u user:password -X POST \

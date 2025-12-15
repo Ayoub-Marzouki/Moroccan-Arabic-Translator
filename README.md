@@ -1,15 +1,18 @@
 # Moroccan AI Translate
 
-A next-generation Spring Boot translation engine that bridges English and Moroccan Arabic (Darija) using **Google Gemini 2.5 Flash Lite**.
+A next-generation Spring Boot translation engine that bridges English and Moroccan Arabic (Darija) using **Google Gemini 2.5 Flash Lite**, featuring a cyberpunk "Neo-Maghreb" aesthetic and robust Text-to-Speech capabilities.
 
 ## ✨ Features
 *   **Gemini 2.5 Flash Lite:** Optimized for speed and higher rate limits.
 *   **Neo-Maghreb Frontend:** A stunning, dark-mode interface inspired by cyberpunk aesthetics and Moroccan geometry.
-*   **Chrome Extension:** Translate instantly from your browser's side panel.
+*   **Text-to-Speech (TTS):** Hear the translation in Arabic using a custom backend proxy that ensures high-quality audio bypassing browser restrictions.
+*   **Chrome Extension:** Translate instantly from your browser's side panel with full TTS support.
 *   **Secure API:** Endpoints are secured using Basic Authentication (Spring Security).
 *   **Developer Friendly:** Clean REST API with comprehensive documentation.
 
 ## 🏗 Architecture
+
+![Pipeline Architecture](pipeline-architecture.svg)
 
 The application is built on Spring Boot 3 and divided into three main layers:
 
@@ -24,10 +27,10 @@ The application is built on Spring Boot 3 and divided into three main layers:
 *   **Location:** `/chrome-extension` folder.
 
 ### 3. The Secure Web Service (`TranslatorRestController`)
-*   **Role:** The engine room.
-*   **Endpoint:** `POST /api/translate`
+*   **Role:** The engine room providing two core endpoints:
+    *   `POST /api/translate`: Orchestrates calls to the Gemini API via `TranslationService`.
+    *   `POST /api/tts`: A proxy endpoint that securely fetches audio from Google TTS to bypass CORS/ORB restrictions.
 *   **Security:** Basic Auth (`user` / `password`).
-*   **Logic:** Orchestrates calls to the Gemini API via `TranslationService`.
 
 ## 🚀 Getting Started
 
@@ -66,7 +69,7 @@ Visit `http://localhost:1000` to experience the animated interface. The site han
 ### 3. REST API (for Developers)
 The API is secured. You must provide Basic Auth credentials.
 
-**cURL Example:**
+**Translate Text:**
 ```bash
 curl -u user:password -X POST \
   -H "Content-Type: application/json" \
@@ -74,12 +77,15 @@ curl -u user:password -X POST \
   http://localhost:1000/api/translate
 ```
 
-**Response:**
-```json
-{
-  "translation": "أهلا صاحبي"
-}
+**Get Audio (TTS):**
+```bash
+curl -u user:password -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"text":"السلام عليكم"}' \
+  --output audio.mp3 \
+  http://localhost:1000/api/tts
 ```
 
-## 📚 Gemini JSON Docs
-Learn more about the underlying JSON structure in [Google's Documentation](https://ai.google.dev/api/generate-content#v1beta.models.generateContent).
+## 📚 Technical Docs
+*   **Gemini JSON Docs:** [Google's Documentation](https://ai.google.dev/api/generate-content#v1beta.models.generateContent).
+*   **TTS Journey:** Read about how we built the TTS feature in [TTS_IMPLEMENTATION_JOURNEY.md](TTS_IMPLEMENTATION_JOURNEY.md).
